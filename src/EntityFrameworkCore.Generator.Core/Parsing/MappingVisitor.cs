@@ -114,7 +114,7 @@ public class MappingVisitor : CSharpSyntaxWalker
         return propertyName;
     }
 
-    private List<string> ParseLambdaExpressionForAnonymousObject(InvocationExpressionSyntax node)
+    private List<string>? ParseLambdaExpressionForAnonymousObject(InvocationExpressionSyntax node)
     {
         if (node == null)
             return null;
@@ -143,13 +143,13 @@ public class MappingVisitor : CSharpSyntaxWalker
                 .ChildNodes()
                 .OfType<MemberAccessExpressionSyntax>()
                 .FirstOrDefault())
-            .Where(memberAccess => memberAccess != null)
-            .Select(memberAccess => memberAccess
+            .OfType<MemberAccessExpressionSyntax>()
+            .Select(memberAccess => memberAccess!
                 .ChildNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Select(identifier => identifier.Identifier.ValueText)
                 .LastOrDefault())
-            .Where(propertyName => propertyName != null)
+            .OfType<string>()
             .ToList();
 
         return propertyNames;
@@ -191,7 +191,7 @@ public class MappingVisitor : CSharpSyntaxWalker
         if (node == null || ParsedEntity == null)
             return;
 
-        List<string> propertyNames = null;
+        List<string>? propertyNames = null;
         if (ParseLambaExpression(node) is string propertyName && !string.IsNullOrEmpty(propertyName))
             propertyNames = new List<string> { propertyName };
         else
