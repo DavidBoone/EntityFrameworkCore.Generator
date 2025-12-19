@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 
 using EntityFrameworkCore.Generator.Extensions;
 using EntityFrameworkCore.Generator.Metadata.Generation;
@@ -137,6 +137,8 @@ public class EntityClassTemplate : CodeTemplateBase
         {
             var propertyType = property.SystemType.ToType();
             var propertyName = property.PropertyName.ToSafeName();
+            if (property.EnumTypeName != null)
+                propertyType = property.EnumTypeName.ToNullableType(property.IsNullable == true);
 
             if (Options.Data.Entity.Document)
             {

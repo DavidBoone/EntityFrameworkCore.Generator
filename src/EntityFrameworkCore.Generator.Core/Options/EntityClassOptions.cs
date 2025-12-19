@@ -1,3 +1,4 @@
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace EntityFrameworkCore.Generator.Options;
@@ -20,6 +21,7 @@ public class EntityClassOptions : ClassOptionsBase
         RelationshipNaming = RelationshipNaming.Plural;
         EntityNaming = EntityNaming.Singular;
         PrefixWithSchemaName = false;
+        EnumMappings = new Dictionary<string, string>();
 
         Renaming = new SelectionOptions(variables, AppendPrefix(prefix, "Naming"));
     }

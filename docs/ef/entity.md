@@ -63,6 +63,8 @@ data:
         - ^(sp|tbl|udf|vw)_
       properties:
         - ^{Table.Name}(?=Id|Name)    
+    enumMappings:
+        dbo.Table.Property: My.Namespace.Enum
 ```
 
 ### name
@@ -98,6 +100,10 @@ Configuration on how to generate relationship property names. Default: `Plural`
 **Obsolete** Use the name option for more flexibility.
 
 Control if class names should be generated with schema name prefixed eg. dbo.MyTable = DboMyTable. Default: `false`
+
+### enumMappings
+
+Dictionary for enum mappings instead of eg. `int` to replace a property use `schema.table.property: namespace.enum`
 
 ### document
 

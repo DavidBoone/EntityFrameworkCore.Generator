@@ -1,4 +1,4 @@
-using System.Data;
+﻿using System.Data;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -242,6 +242,7 @@ public partial class ModelGenerator
             property.NativeType = mapping.StoreTypeNameBase;
             property.DataType = mapping.DbType ?? DbType.AnsiString;
             property.SystemType = mapping.ClrType;
+            property.EnumTypeName = _options.Data.Entity.EnumMappings.GetValueOrDefault($"{column.Table.Schema}.{column.Table.Name}.{column.Name}");
             property.Size = mapping.Size;
 
             // overwrite row version type

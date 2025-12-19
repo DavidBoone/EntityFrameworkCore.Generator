@@ -1,4 +1,4 @@
-using System.Data;
+﻿using System.Data;
 using System.Diagnostics;
 
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -21,6 +21,8 @@ public class Property : ModelBase
     public DbType DataType { get; set; }
 
     public Type SystemType { get; set; } = null!;
+
+    public string? EnumTypeName { get; set; }
 
     public bool? IsNullable { get; set; }
 
